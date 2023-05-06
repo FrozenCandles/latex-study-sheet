@@ -1,0 +1,73 @@
+\subsection{颜色}
+
+\begin{enumerate}
+
+\item 简单的文本颜色：\boxforpkg{xcolor} 宏包提供了创建颜色的工具。\boxforcmd{\\color{}} 是一个声明，它能使块中接下来所有文本（包括公式）变成参数的颜色，例如声明 \verb|\color{blue}| {\color{blue}会使接下来所有文本变为蓝色。}
+
+\item 页面颜色：使用 \boxforcmd{\\pagecolor{}} 会更改当前及其之后页面的颜色，在某一页使用 \boxforcmd{\\nopagecolor} 可以暂时去除该页面施加的颜色效果。
+
+\fcolorbox{black}{black}{%
+\begin{minipage}{\dimexpr0.33\textwidth-2\fboxrule-2\fboxsep\relax}
+\color{white}
+这是一个使用 \lstinline[language=TeX]{\\pagecolor{black}} 和 \lstinline[language=TeX]{\\color{white}} 的页面局部效果。
+\end{minipage}}
+
+\item 颜色盒子：\boxforcmd{\\fcolorbox{}{}{}} 可以创建一个颜色盒子，为文本添加带有颜色的边框和背景，三个参数分别是边框颜色、背景色和文本内容。
+
+\fcolorbox{blue}{yellow}{这是一段具有 blue 边框、yellow 背景的文本。}
+
+\item 局部颜色：使用 \boxforcmd{\\textcolor{}{}} 可以创建\textcolor{red}{局部的颜色}，两个参数分别为颜色名和影响的文本。它常用于公式环境中，例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\[ \lim_{\textcolor{red}{\Delta}\to 0}
+(1+\textcolor{red}{\Delta})^\frac
+{1}{\textcolor{red}{\Delta}} =e\]
+\end{lstlisting} 
+
+\tcblower
+
+\[
+\lim_{\textcolor{red}{\Delta} \to 0}
+(1+\textcolor{red}{\Delta})
+^\frac{1}{\textcolor{red}{\Delta}} = e
+\]
+\end{tcolorbox}
+
+\item 颜色名：可以直接使用颜色名指代颜色，\boxforpkg{xcolor} 宏包可以直接使用的颜色名约有20个。使用宏包的 \boxforcmd{[dvipsnames]} 参数可以额外使用约70个颜色名，例如\;{\color{BrickRed}\verb|BrickRed|} 和\;{\color{Periwinkle}\verb|Periwinkle|} 这样的颜色名。
+
+进一步使用宏包的 \boxforcmd{[x11names]} 参数可以加载300多种颜色名，例如\;{\color{Aquamarine3}\verb|Aquamarine3|} 和\;{\color{Goldenrod2}\verb|Goldenrod2|} 这样的颜色名。
+
+\item 自定义颜色：在导言区使用 \boxforcmd{\\definecolor{}{}{}} 可以自定义颜色，三个参数分别是自定义的颜色名、颜色格式、颜色值。颜色值的形式取决于颜色格式，可用的颜色格式有：
+
+\begin{itemize}[itemsep=0pt]
+    \item \verb|RGB| ：红绿蓝混色，每种色值取值范围为 0--255 ，用逗号分隔
+    \item \verb|rgb| ：同上，但每种色值取值范围为 0--1.0
+    \item \verb|cmyk| ：彩印标准颜色，每种色值取值范围为 0--1.0
+    \item \verb|gray| ：灰度颜色，取值范围为 0--1.0
+    \item \verb|HTML| ：六位十六进制 RGB 颜色值
+    \item \verb|wave| ：对应波长的颜色，取值为 363--814 
+\end{itemize}
+
+对于如下定义：
+
+\begin{tcolorbox}[colback=white]
+\begin{lstlisting}[language=TeX]
+\definecolor{FrozenBlue}{RGB}{157,234,242}
+\definecolor{CandleRed}{HTML}{F57267}
+\end{lstlisting}
+\end{tcolorbox}
+
+这是\;{\color{FrozenBlue}\verb|FrozenBlue|} 和\;{\color{CandleRed}\verb|CandleRed|} 的呈现效果。
+
+如果 \verb|\definecolor| 定义的颜色名和现有颜色名重复，会覆盖之前定义的颜色名。\boxforcmd{\\providecolor} 命令用法类似，但发现重复定义后会放弃新的定义。
+
+\item 自定义混合颜色：\boxforcmd{\\colorlet{}{}} 提供了通过混合颜色来定义颜色的一种形式，被混合颜色和混合比例均以感叹号 \boxforcmd{!} 结尾，例如：
+
+\begin{lstlisting}[language=TeX]
+\colorlet{PurplePink}{red!60!blue!40!}
+\end{lstlisting}
+
+会使用 60\% 红色和 40\% 蓝色混合出\;{\color{PurplePink}\verb|PurplePink|} 颜色。
+
+\end{enumerate}

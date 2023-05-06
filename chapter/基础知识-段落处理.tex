@@ -1,0 +1,27 @@
+\subsection{段落处理}
+\begin{enumerate}
+
+\item 文本对齐：有左中右三种对齐方式，如下表：
+
+\begin{tcolorbox}[colback=white]
+\centering
+\begin{tabular}{cccc}
+    对齐方式 & 声明形式 & 环境形式 & 参数形式 \\
+\hline
+    居中对齐 & \verb|\centering| & \verb|center| 环境 & \verb|\centerline{}| \\
+    左对齐 & \verb|\raggedright| & \verb|flushleft| 环境 & \verb|\leftline{}| \\
+    右对齐 & \verb|\raggedleft| & \verb|flushright| 环境 & \verb|\rightline{}| \\
+\end{tabular}
+\end{tcolorbox}
+
+声明形式的对齐会影响接下来所有文本的对齐方式，环境形式只影响环境内的对齐方式，参数形式只影响参数内文本的对齐方式。
+
+\item 换行：\LaTeX 中的多个空格会被视为一个，多个换行符也会被视为一个。使用两个回车可用于在正文中换行。使用两个反斜杠 \boxforcmd{\\\\} 用于强制换行。
+
+\item 段落与缩进：使用 \boxforcmd{\\par} 可以生成一个带缩进的新段。
+
+\item 换页：使用 \boxforcmd{\\newpage} 开始新的一页。 
+
+
+
+\end{enumerate}

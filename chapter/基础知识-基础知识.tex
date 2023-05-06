@@ -1,0 +1,69 @@
+\subsection{\LaTeX 文档结构}
+\begin{enumerate}
+
+\item 文档结构：以下是一份最为简单的 \LaTeX 文档：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\documentclass{article} 
+\begin{document}
+Hello, \LaTeX
+\end{document}
+\end{lstlisting} 
+
+\tcblower
+
+\begin{center}
+Hello, \LaTeX
+\end{center}    
+\end{tcolorbox}
+
+\item 命令：在 \LaTeX 中，命令也称控制序列(control sequence)，以一个反斜杠加上命令名构成。开头的命令 \newline \boxforcmd{\\documentclass} 指定了使用的文档类，花括号 \boxforcmd{\{\}} 内的内容是命令的参数，\verb|article| 表示文章格式的文档类，除此之外可用的参数还有表示报告的文档类 \verb|report| 和表示书籍的文档类 \verb|book| 等。
+
+如果命令的参数只有一个字符，则花括号可省略，但需要用空格区分命令与参数。
+
+有些命令还存在可选参数，可选参数通常会在花括号前用方括号 \boxforcmd{[]} 表示，例如：
+
+\begin{tcolorbox}
+\begin{lstlisting}
+\documentclass[11pt,a4paper]{article} 
+\end{lstlisting} 
+\end{tcolorbox}
+
+多数命令只在原地产生效果，但有些命令则会影响作用域内后面的所有内容，这种命令又称为声明(declaration)。
+
+\boxforcmd{\\begin} 和 \boxforcmd{\\end} 一对命令定义了一个环境，环境表示命令或内容的作用范围。环境如果有备选或额外参数，只需在 \verb|\begin| 中表示。\boxforenv{document} 环境当中的内容是文档正文，在此环境外书写的内容可能不会出现在文档中。
+
+语句 \verb|\begin{document}| 之前的内容称为\textbf{导言区}，导言区可以留空，也可以编写文档所需要的信息与工具。
+
+\verb|\LaTeX| 命令用于输出一个特殊的符号 \LaTeX ，像这样表示符号的命令还有很多。
+
+\item 注释：以百分号 \boxforcmdbox{\lstinline[language=Python]|\%|} 开头的部分是行注释。
+
+注释有时放在行尾，用于取消换行产生的一个多余的空格。
+
+如果要单独表示百分号，需要使用反斜杠转义 \boxforcmdbox{\vphantom{f}\textbackslash\lstinline[language=Python]|\%|}
+
+\item 单位：\LaTeX 中常用的衡量长度的单位有：
+
+\begin{itemize}
+    \item pt ：磅(point)
+    \item pc ：四号字(pica) 1 pc = 12 pt
+    \item in ：英寸(inch) 1 in = 72.27 pt 
+    \item bp ：大点(bigpoint) 1 bp = $\displaystyle{\frac{1}{72}}$ in 
+    \item cm ：厘米(centimeter) 1 cm = $\displaystyle{\frac{1}{2.54}}$ in
+    \item mm ：毫米(millimeter)
+    \item sp ：\TeX 的基本长度单位 scaled point ，1 sp = $\displaystyle{\frac{1}{65536}}$ pt
+    \item em ：当前字号下大写字母 M 的宽度
+    \item ex ：当前字号下小写字母 x 的高度
+\end{itemize}
+
+\item 宏包：宏包的作用是扩展或调整 \LaTeX 的排版功能。一个宏包往往能提供更多的命令、环境，或为内置的命令/环境添加更多功能。
+
+在导言区使用 \boxforcmd{\\usepackage{}} 即可引入宏包，然后便可以使用宏包提供的功能。部分宏包在引入时可以通过命令的可选参数调节需要引入的功能。
+
+例如，引入 \boxforpkg{ctex} 宏包可以在文档中排版中文字符，引入 \boxforpkg{amssymb} 宏包可以使用命令 \verb|\bigstar| 表示一个填充五角星符号 $\bigstar$
+
+
+
+\end{enumerate}

@@ -1,0 +1,330 @@
+\section{数学公式}
+
+\subsection{引入公式}
+
+\begin{enumerate}
+
+\item 行内公式：行内公式将嵌入到文本行中，公式垂直距离不会过高。行内公式有 3 种引入方式：
+
+\begin{itemize}
+    \item \verb|$...$|
+    \item \verb|\(...\)|
+    \item \verb|\begin{math}...\end{math}|
+\end{itemize}
+
+例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+$ a + b = c $
+\end{lstlisting} 
+\tcblower
+
+$ a + b = c $
+\end{tcolorbox}
+
+\item 行间公式：行间公式将单独出现并居中，垂直距离将适应公式内容。行间公式有 3 种引入方式：
+
+\begin{itemize}
+    \item \verb|$$ ... $$|
+    \item \verb|\[ ... \]|
+    \item \verb|\begin{displaymath} ... \end{displaymath}|
+\end{itemize}
+
+例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\[ \sum_{i=1}^{n}x_i \]
+\end{lstlisting} 
+
+\tcblower
+
+\[
+    \sum_{i=1}^{n}x_i
+\]
+\end{tcolorbox}
+
+如果用行内公式表达它，受行高限制呈现的效果稍有不同，接下来给出示例：
+
+\item 公式尺寸：公式在不同位置会呈现不同尺寸，如果要让公式强制排版为特定的尺寸，可以使用以下几个声明：
+
+\begin{tcolorbox}[colback=white]
+\begin{center}
+\begin{tabular}{ccc}
+    命令 & 尺寸 & 示例\\
+\hline
+    \verb| \displaystyle | & 行间公式尺寸 & $\displaystyle{\sum_{i=1}^{n}x_i}$\\
+    \verb| \textstyle | & 行内公式尺寸 & $\textstyle{\sum_{i=1}^{n}x_i}$\\
+    \verb| \scriptstyle | & 上下标公式尺寸 & $\scriptstyle{\sum_{i=1}^{n}x_i}$\\
+    \verb| \scriptscriptstyle | & 次上下标尺寸 & $\scriptscriptstyle{\sum_{i=1}^{n}x_i}$\\
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\item 下标与上标：下标使用 \boxforcmd{_} 符号，上标使用 \boxforcmd{^} 符号，例如 \boxforcmd{a_n} \, $a_n$ 或 \boxforcmd{e^x} \, $e^x$ 
+
+% \begin{center}
+% \begin{tabular}{cc}
+% \hline
+% \quad\verb|a_n| &\quad $a_n$\quad\\
+% \quad\verb|e^x| &\quad $e^x$\quad\\
+% \hline
+% \end{tabular}
+% \end{center}
+
+如果上下标内不止一个字符，这些字符需要用花括号 \boxforcmd{\{\}} 定界，例如 \boxforcmd{x^\{10\}} \, $ x^{10} $ 。
+
+\item 数学符号：在数学公式内的字母将会变为斜体。一些基本函数如 \boxforcmd{\\sin} 需要使用命令表示，从而用正体表示字母：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+function \sin x
+\end{lstlisting} 
+
+\tcblower
+
+$ function \sin x $
+\end{tcolorbox}
+
+\end{enumerate}
+\subsection{基本公式排版}
+\begin{enumerate}
+
+\item 基本符号：加号 \boxforcmd{+} $+$ 减号 \boxforcmd{-} $-$ 和等号 \boxforcmd{=} $=$ 直接使用对应字符创建，其余四则运算符号需要使用命令创建：乘号 \boxforcmd{\\times} $\times$ 除号 \boxforcmd{\\div} $\div$ 不等号 \boxforcmd{\\neq} $\neq$
+
+\item 分式：使用命令 \boxforcmd{\\frac\{\}\{\}} ，两个参数分别表示分子和分母，例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\[ \frac{e^x}{\frac a b} \]
+\end{lstlisting} 
+
+\tcblower
+
+\[
+    \frac{e^x}{\frac a b}
+\]
+\end{tcolorbox}
+
+同样，如果分子或分母内不止一个字符，需要用花括号定界。
+
+\item 导数：直接使用单引号 \boxforcmd{'} 来表示：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+$ f'(x) = a^x \ln x $
+\end{lstlisting} 
+
+\tcblower
+
+$ f'(x) = a^x \ln x $
+\end{tcolorbox}
+
+\item 三种带上下限的特殊符号：求和 \boxforcmd{\\sum} $\sum$ 、求积 \boxforcmd{\\prod} $\prod$ 、积分 \boxforcmd{\\int} $\int$ ，它们均使用下标 \boxforcmd{_} 符号和上标 \boxforcmd{^} 符号来表示其上下限，例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\sum_{i=1}^{N} a_i
+\end{lstlisting} 
+
+\tcblower
+
+$$ \sum_{i=1}^{N} a_i $$
+\end{tcolorbox}
+
+\item 根号：使用 \boxforcmd{\\sqrt} 命令，配合可选参数可以得到不同次数的根式：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\sqrt{9} \sqrt[3]{x}
+\end{lstlisting} 
+
+\tcblower
+
+$$ \sqrt{9} \quad \sqrt[3]{x} $$
+\end{tcolorbox}
+
+\item 极限：用 \boxforcmd{\\lim} 表示极限运算符，使用下标的形式表示底下的趋近关系，其中使用 \boxforcmd{\\to} 命令表示趋近的箭头，例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\[ \lim_{x \to \infty}f(x) \]
+\end{lstlisting} 
+
+\tcblower
+
+\[ \quad \lim_{x \to \infty}f(x) \]
+\end{tcolorbox}
+
+
+\end{enumerate}
+\subsection{公式的细节}
+\begin{enumerate}
+
+\item 空格：源文件中在数学公式中的空格会被忽略。可以通过以下几种命令向公式中添加空格：
+
+\begin{tcolorbox}[colback=white]
+\begin{center}
+\begin{tabular}{cccc}
+    命令 & 空格大小 & 命令 & 空格大小\\
+\hline
+    \verb| \, | & $3/18$ 空格 & \verb| \: | & $4/18$ 空格\\
+    \verb| \; | & $5/18$ 空格 & \verb| \! | & $-3/18$ 空格\\
+    \verb| \quad | & $1$ 空格 & \verb| \qquad | & $2$ 空格\\
+    \verb| \|\texttt{\textvisiblespace} & $9/18$ 空格 & (反斜杠加空格)  & \\
+\end{tabular}
+\end{center} 
+\end{tcolorbox}
+
+负数尺寸的空格会拉进两个字符的距离。
+
+\item 数学运算符与数学关系符：数学运算符和数学关系符区别在于两侧的间距。例如 \verb|$a+b$| 表现为 $a+b$ ，但 \verb|$+b$| 表现为 $+b$ 。前者的符号 \verb|+| 是数学运算符，而后者的符号 \verb|+| 是正号符号。数学运算符相比普通符号，左右两侧间距更大。数学关系符类似，且两侧间距比运算符略大，如 \verb|$a<b$| 中的关系符表现为 $a<b$ 。
+
+数学模式中花括号 \verb|{}| 内的公式将独立考虑符号关系，可以与两侧符号隔离，使之不成为运算符或关系符，从而取消间距，如 \verb|$a{+}b$| 表现为 $a{+}b$ 。
+
+普通符号两侧没有预留间距，命令 \boxforcmd{\\mathbin{}} 与 \boxforcmd{\\mathrel{}} 则能分别把参数转换为二元运算符和二元关系符，并正确设置两侧的空距，在对齐时用处较大。
+
+\item 公式与标点符号：公式中常用的标点符号有 \boxforcmd{,;} ，它们与普通符号的区别为只与右侧符号有间距。普通的冒号 \boxforcmd{:} 得到的是数学关系符，而命令 \boxforcmd{\\colon} 得到的才是标点符号中的冒号，且间距左小右大，参见 \boxforcmd{$a:b$} $a:b$ 与 \boxforcmd{$a \colon b$} $a \colon b$ 的区别。
+
+命令 \boxforcmd{\\mathpunct{}} 能把参数作为标点符号处理，并正确设置左无右有的间距。
+
+\item 操作符与上下标：数学操作符的上下标作为行间公式时，将会显示在正下方，而不是右上下方，例如 \boxforcmd{\\min_i} 会显示为 $\displaystyle{\min_i}$ ，\boxforcmd{\\mathop{}} 命令可以将参数转换为操作符，例如 \boxforcmd{x_n^2} $\displaystyle{x_n^2}$ 与 \boxforcmd{\\mathop{x}_n^2} $\displaystyle{\mathop{x}_n^2}$ 的区别
+
+\boxforcmd{\\limits} 命令用在行内公式中，跟随在任意数学操作符后，可以将它的上下标显示在数学操作符的正上下方，并且保持行内公式的紧凑性，例如:
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+$\int\limits_a^b f(x)\df{}x$
+\end{lstlisting} 
+
+\tcblower
+
+${\int\limits_a^b f(x)\mathrm{d}x}$
+\end{tcolorbox}
+
+\item 堆叠上下标：\boxforcmd{\\substack{}} 命令需要 \boxforenv{amsmath} 宏包支持，用于将多行符号堆叠为一个上下标，参数中可以使用两个下划线 \boxforcmd{\\\\} 换行，例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\[ 
+  \lim_{\substack{x \to x_0 \\ 
+                  y \to y_0}} f(x, y) 
+\]
+\end{lstlisting} 
+
+\tcblower
+
+\[ 
+    \lim_{\substack{x \to x_0 \\ y \to y_0}} f(x, y) 
+\]
+\end{tcolorbox}
+
+\item 定界符：以下展示了一些常用的定界符：
+
+\begin{tcolorbox}[colback=white]
+\begin{center}
+\begin{tabular}{cccc|cccc}
+    命令 & 符号 & 命令 & 符号 &
+    命令 & 符号 & 命令 & 符号\\
+    \verb|(| & $($ & \verb|)| & $)$ \\
+    \verb|\lbrace| or \verb|{| & $\lbrace$ & \verb|\rbrace| or \verb|}| & $\rbrace$ &
+    \verb|\lbrack| or \verb|[| & $\lbrack$ & \verb|\rbrack| or \verb|]| & $\rbrack$ \\
+    \verb|\lfloor| & $\lfloor$ & \verb|\rfloor| & $\rfloor$ &
+    \verb|\lceil| & $\lceil$ & \verb|\rceil| & $\rceil$ \\
+    \verb|\langle| & $\langle$ & \verb|\rangle| & $\rangle$ &
+    \verb|\vert| or \lstinline||| & $\vert$ & \verb|\Vert| or \lstinline|\|| & $\Vert$ \\
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\item 定界符高度：使用 \boxforcmd{\\big} 等一系列命令及其与 \boxforcmd{r} 和 \boxforcmd{l} 的组合可以产生具有不同大小的括号：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+$$ ( \big( \Big(
+    \frac{ax+b}{\ln\,x}
+  \bigg) \Bigg) \Biggr) $$
+\end{lstlisting} 
+
+\tcblower
+
+$$ (\big(\Big(
+\frac{ax+b}{\ln\,x}
+\bigg)\Bigg)\Biggr ) $$
+\end{tcolorbox}
+
+使用 \boxforcmd{\\left} 、\boxforcmd{\\right} 以及 \boxforcmd{\\middle} 能使定界符自适应公式的高度。\verb|\left| 和 \verb|\right| 必须成对出现以限定范围。单个点号表示的 \boxforcmd{\\left.} 和 \boxforcmd{\\right.} 仅用于配对以限定范围，不输出任何符号。
+
+大于号 \boxforcmd{<} 和小于号 \boxforcmd{>} 也可以组合这些命令得到不同大小的尖括号。
+
+\item 分式的各种表现：基本的 \verb|\frac| 会在不同位置表现出不同的尺寸，\boxforcmd{\\tfrac} 和 \boxforcmd{\\dfrac} 分别创建 text 和 display 样式的分式，例如 \boxforcmd{\\dfrac{1}{1+x}} 在行内也显示为 $\dfrac{1}{1+x}$ ，这会撑起行高。
+
+\item 连分式：使用 \boxforcmd{\\cfrac} 创建，以下是分别使用 \verb|\frac|、\verb|\dfrac| 和 \verb|\cfrac| 创建的嵌套分式效果：
+
+\begin{tcolorbox}[colback=white]
+\[
+    a_0+\frac{1}{a_1+\frac{1}{a_2+\frac{1}{a_3}}}
+    \qquad
+    a_0+\dfrac{1}{a_1+\dfrac{1}{a_2+\dfrac{1}{a_3}}}
+    \qquad
+    a_0+\cfrac{1}{a_1+\cfrac{1}{a_2+\cfrac{1}{a_3}}}
+\]
+\end{tcolorbox}
+
+
+\end{enumerate}
+\subsection{公式字体与字符}
+\begin{enumerate}
+
+\item 粗体：数学环境中的粗体使用 \boxforpkg{amsmath} 宏包提供的 \boxforcmd{\\boldsymbol\{\}} 命令，例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\boldsymbol{y} = k \boldsymbol{x}
+\end{lstlisting} 
+
+\tcblower
+
+$$ \boldsymbol{y} = k \boldsymbol{x} $$
+\end{tcolorbox}
+
+\item 正体：数学公式内的字体默认为斜体，使用命令 \boxforcmd{\\mathrm\{\}} 可以在公式内创建正体，例如 \verb|$\mathrm{argmin}$| 效果为 $\mathrm{argmin}$
+
+\item 原生数学字体：下表列出了原生的数学字体：
+
+\begin{tcolorbox}[colback=white]
+\begin{center}
+\begin{tabular}{cc}
+    命令 & 效果 \\
+    \hline
+    \verb|\mathrm{ABCDabcd1234}| & $\mathrm{ABCDabcd1234}$ \\
+    \verb|\mathit{ABCDabcd1234}| & $\mathit{ABCDabcd1234}$ \\
+    \verb|\mathnormal{ABCDabcd1234}| & $\mathnormal{ABCDabcd1234}$ \\
+    \verb|\mathcal{ABCDabcd1234}| & $\mathcal{ABCDabcd1234}$ \\
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\item 其它数学字体：其它一些宏包支持的数学字体对 \verb|ABCDabcd1234| 的排版效果为：
+
+\begin{tcolorbox}[colback=white]
+\begin{center}
+\begin{tabular}{ccc}
+    命令 & 效果 & 所需宏包 \\
+    \hline
+    \verb|\mathbb| & $\mathbb{ABCDabcd1234}$ & \verb|amsfonts|/\verb|amssymb| \\
+    \verb|\mathfrak| & $\mathfrak{ABCDabcd1234}$ & \verb|amsfonts|/\verb|amssymb| \\
+    \verb|\mathscr| & $\mathscr{ABCDabcd1234}$ & \verb|mathrsfs| \\
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\item 希腊字母：使用对应字母名表示，例如 \boxforcmd{\\alpha} $\alpha$ ，首字母大写表示大写希腊字母，例如 \boxforcmd{\\Omega} $\Omega$ 。有些希腊字母前面加上 var 表示花写，例如 \boxforcmd{\\varphi} $\varphi$ 相比于 \boxforcmd{\\phi} $\phi$ 。
+
+\item 正体小写希腊字母：宏包 \boxforpkg{txfonts} 以 \verb|up| 结尾的命令可以得到正体的小写希腊字母，如 \boxforcmd{\\thetaup} $\uptheta$ 相较于斜体的 \boxforcmd{\\theta} $\theta$ 。
+
+宏包 \boxforpkg{txfonts} 可能会改变其它数学符号甚至正文的字体样式，可以替换为宏包 \verb|upgreek| ，它以 \verb|up| 开头的命令也可以得到正体小写希腊字母，如 \boxforcmd{\\uppi} $\uppi$ ，且不会有副作用。宏包 \verb|upgreek| 有三个互斥的可选项：\verb|Euler|、\verb|Symbol| 和 \verb|Symbolsmallscale| ，分别加载不同的字体或字号。
+
+
+\end{enumerate}

@@ -1,0 +1,76 @@
+\subsection{特殊符号}
+\begin{enumerate}
+
+\item 空格：在 \LaTeX 中，字符间的空白会自动调整。
+
+不带参数的命令后面的空格，要用空的花括号对加上空格来表示，否则空格会被忽略，例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\LaTeX without \{\}
+\LaTeX{} with \{\}
+\end{lstlisting} 
+
+\tcblower
+
+\LaTeX without \{\}
+
+\LaTeX{} with \{\}
+\end{tcolorbox}
+
+\item 引号：英文单引号分左右引号。左单引号用重音符 \boxforcmd{`} 表示，右单引号用普通引号 \boxforcmd{'} 表示，左双引号用连续两个重音符 \boxforcmd{``} 表示，右双引号用连续两个单引号 \boxforcmd{''} 表示。
+
+英文下的引号嵌套需要借助 \boxforcmd{\\thinspace} 命令分隔，例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+``\thinspace`single' quotes''
+\end{lstlisting}
+
+\tcblower
+
+``\thinspace`single' quotes''
+\end{tcolorbox}
+
+中文引号可以直接输入。
+
+\item 短横：英文短横有 3 种：
+
+\begin{itemize}
+    \item 连字符：用一个短横 \boxforcmd{-} 表示，如 clear-cut ； 
+    \item 数字起止符：用两个短横 \boxforcmd{--} 表示，如 page 1--2 ；
+    \item 破折号：用三个短横 \boxforcmd{---} 表示，如 Look---It's a dash 。
+\end{itemize}
+
+中文破折号可以直接输入。
+
+\item 省略号：英文省略号用 \boxforcmd{\\ldots} 符号表示，效果为 \ldots 。中文省略号可以直接输入。
+
+\item 保留字符：以下字符在 \LaTeX 中具有特殊含义，不能直接作为文档中的一个字符：
+
+\begin{tcolorbox}
+\lstinputlisting[language=C]{./resource/lstcode/01-special-chars.tex}
+\end{tcolorbox}
+
+除反斜杠外，其余字符均能用反斜杠的形式转义输出：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}[language=C]
+\# \$ \% \^{} \& \_ \{ \}
+\end{lstlisting} 
+
+\tcblower
+
+\; \# \$ \% \^{} \& \_ \{ \}
+\end{tcolorbox}
+
+反斜杠 \boxforcmd{\\} 可以使用以下方式得到：
+
+\begin{tcolorbox}
+\begin{lstlisting}
+\textbackslash $\backslash$
+\end{lstlisting}
+\end{tcolorbox}
+
+
+\end{enumerate}

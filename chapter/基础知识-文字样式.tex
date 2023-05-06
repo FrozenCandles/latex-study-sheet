@@ -1,0 +1,76 @@
+\subsection{文字样式}
+\begin{enumerate}
+
+\item 粗体与斜体：广义的斜体命令是 \verb|\textit{}| ，粗体命令是 \verb|\textbf{}| 。\boxforcmd{\\emph{}} 命令用于强调文本，对西文字母而言就是变为斜体。例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\emph{text} and \textbf{text}
+\end{lstlisting} 
+
+\tcblower
+
+\emph{text} and \textbf{text}
+\end{tcolorbox}
+
+\item 字体样式：可以通过以下声明修改字体的字族、字系、字形效果，这三种类型声明相互独立，可以组合使用：
+
+\begin{tcolorbox}[colback=white]
+\begin{center}
+\begin{tabular}{cc<{\;\;}@{-}>{\;\;}l}
+    \multirow{3}{*}{字族} & \verb|\rmfamily| & 罗马字族 \rmfamily{Roman} \\
+        & \verb|\sffamily| & 无衬线字族 \rmfamily{Sans Serif} \\
+        & \verb|\ttfamily| & 罗马字族 \rmfamily{Typewriter} \\
+    \hline
+    \multirow{2}{*}{字系} & \verb|\bfseries| & 粗体 \bfseries{Bold Font} \\
+        & \verb|\mdseries| & 中粗体 \mdseries{Middle} \\
+    \hline
+    \multirow{4}{*}{字形} & \verb|\upshape| & 竖直 \upshape{Upshape} \\
+        & \verb|\slshape| & 斜体 \slshape{Slant} \\
+        & \verb|\itshape| & 意大利体 \itshape{Italic} \\
+        & \verb|\scshape| & 小号大写体 \scshape{SmallCap} \\
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+但如果不存在这样的字体设计，某些效果可能不会生效。
+
+这些声明会影响之后的所有文本，如果只是改变局部字体样式，可以使用 \verb|\text..| 这类命令，例如 \boxforcmd{\\textbf{}} 。
+
+\item 字号：在 \verb|\documentclass| 的可选参数可以指定正文字号大小，参见对可选参数的第一次介绍。可以通过以下声明相对地改变字号大小：
+
+\begin{tcolorbox}[colback=white]
+\begin{center}
+\begin{tabular}{lll}
+    \verb|\tiny| & \verb|\scriptsize| & \verb|\footnotesize| \\
+    \verb|\small| & \verb|\normalsize| & \verb|\large| \\
+    \verb|\Large| & \verb|\LARGE| & \verb|\huge| \\
+    \verb|\Huge| && \\
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\item 基本下划线：原生的$\underline{\text{下划线命令}}$是 \boxforcmd{\\underline} ，$\overline{\text{上划线命令}}$是 \boxforcmd{\\overline} ，它们均需要在公式环境(参见2.1节)中使用。
+
+\item 更好的下划线：\boxforpkg{ulem} 宏包提供了更好的下划线命令，包括：
+
+\begin{tcolorbox}[colback=white]
+\begin{center}
+    
+\hspace{-1.5em}\begin{tabular}{cccc}
+命令 & 效果 & 命令 & 效果\\
+\hline
+\verb|\uline{}| & \uline{下划线} & \verb|\uuline{}| & \uuline{双下划线} \\ 
+\verb|\dashuline{}| & \dashuline{虚线下划线} & \verb|\dotuline{}| & \dotuline{点下划线} \\ 
+\verb|\uwave{}| & \uwave{波浪线} & \verb|\sout{}| & \sout{删除线} \\ 
+\verb|\xout{}| & \xout{斜删除线} & & \\ 
+\end{tabular}
+
+\end{center}
+\end{tcolorbox}
+
+这些命令可以直接使用。
+
+\verb|ulem| 宏包修改了 \boxforcmd{\\emph} 命令的效果，会给强调文本加下划线，可能不是想要的效果，可以通过宏包的 \boxforcmd{[normalem]} 选项取消该效果。
+
+\end{enumerate}

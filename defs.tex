@@ -1,0 +1,91 @@
+\usepackage{lmodern}  % 消除 "Font shape not available"，但好像没有消除
+\usepackage{anyfontsize}  % 这回真消除了
+\usepackage{multicol}
+\usepackage{colortbl}
+\usepackage{geometry} % 设置页面边距
+\geometry{a4paper,left=0.8cm,right=0.8cm,top=1.5cm,bottom=1.2cm}
+
+\usepackage{amsmath}  % 数学符号支持
+\usepackage{amssymb}  % 数学符号支持
+
+\usepackage{listings} % 插入代码
+\lstset{
+    language=[LaTeX]TeX,
+    basicstyle=\tt\small,
+    basicstyle=\tt\normalsize,
+    aboveskip=0pt,
+    belowskip=0pt,
+}
+
+% \usepackage{cprotect}
+\usepackage{graphicx}  % 图片插入
+\usepackage{float}     % 浮动效果
+\usepackage{color}     % 忘了干嘛用的了
+\definecolor{shadecolor}{rgb}{0.92,0.92,0.92}
+
+\usepackage{lipsum}    % 多栏环境下的图片支持
+\usepackage{caption}   % 多栏环境下的图片支持
+\newenvironment{figincolumn}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+
+\usepackage[normalem]{ulem} % 更好的下划线[别的不变]
+\usepackage{multirow}  % 单元格跨行列
+\usepackage{hyperref}
+
+\usepackage[dvipsnames,x11names]{xcolor}  % 颜色[更多颜色,更更多颜色]
+
+\definecolor{FrozenBlue}{RGB}{157,234,242}
+\definecolor{CandleRed}{HTML}{F57267}
+\colorlet{PurplePink}{red!60!blue!40!}
+
+\usepackage{enumitem}  % 调整列表间距
+\usepackage{soul}      % 有颜色的文本装饰
+\usepackage{mathrsfs}  % 数学字体 \mathscr{}
+\usepackage{mathtools} % 复合数学公式排版
+\usepackage{array}     % 更好的表格对齐
+\usepackage{siunitx}   % 小数对齐的列格式
+\sisetup{
+    round-mode=places,
+    round-precision=2,
+}
+\usepackage[many]{tcolorbox}  % 好看的框框
+\usepackage{makecell} % 单元格换行，带粗细的表格线
+\usepackage{diagbox}  % 分割表头
+\usepackage[Symbol]{upgreek}  % 正体小写希腊字母[好看一点]
+
+\newtcbox{\boxforpkg}{enhanced,nobeforeafter,tcbox raise base,boxrule=0.4pt,top=0mm,bottom=0mm,
+  right=0mm,left=4mm,arc=1pt,boxsep=2pt,before upper={\vphantom{dlg}},
+  colframe=black,coltext=black,colback=gray!5!white,
+  overlay={\begin{tcbclipinterior}\fill[black!30!white] (frame.south west)
+    rectangle node[text=white,font=\sffamily\bfseries\tiny,rotate=90] {PKG} ([xshift=4mm]frame.north west);\end{tcbclipinterior}}}
+
+
+
+
+
+\tcbset{skin=bicolor, colback=gray!15!white, colbacklower=white, size=small}
+
+\newtcbox{\boxforenv}{on line,before 
+upper={\rule[-0.2ex]{0pt}{1ex}\ttfamily},
+arc=0pt,colback=white, colframe=black,
+boxsep=2pt,left=1.5pt,right=1.5pt,top=1pt,bottom=1pt, 
+boxrule=0.5pt}
+
+\newtcbox{\boxforcmdbox}{on line,before 
+upper={\rule[-0.2ex]{0pt}{1ex}\ttfamily},
+arc=0.4ex,colback=gray!10!white, colframe=black,
+boxsep=2pt,left=1.5pt,right=1.5pt,top=1pt,bottom=1pt, 
+boxrule=1pt}
+
+% , righthand width=0.6\linewidth
+
+
+\newcommand{\boxforcmd}[1]{\boxforcmdbox{\lstinline[language=TeX]|#1|}}%\vphantom{fg}
+\newcommand{\dd}{\mathop{}\negthinspace\mathrm{d}}
+
+
+\makeatletter
+\newcommand\figcaption{\def\@captype{figure}\caption}
+\newcommand\tabcaption{\def\@captype{table}\caption}
+\makeatother

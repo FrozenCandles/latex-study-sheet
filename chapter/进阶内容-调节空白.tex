@@ -1,0 +1,71 @@
+\subsection{调节空白距离}
+
+\begin{enumerate}
+
+\item 定长水平空白：以下几个水平空白在公式环境外也能产生相同的空白效果：
+
+\begin{tcolorbox}[colback=white]
+\begin{lstlisting}
+\, \: \; \! \quad \qquad
+\end{lstlisting}
+\end{tcolorbox}
+
+这些命令置于段首和段尾无效。
+
+\item 自定义水平空白：\boxforcmd{\\hspace{}} 用于在两个字符间产生高度为零的水平空白，参数为产生空白的水平距离。水平距离可以为负值，表示拉近间距。
+
+该命令置于段首有效，置于段尾无效。如果命令位于换行处（左右字符输出后位于行尾和行首）将失效。
+
+带星号的 \boxforcmd{\\hspace*{}} 作用基本相同，但它在换行处也可以工作，一定能在其左右字符之间生成空白。
+
+\item 虚位水平空白：\boxforcmd{\\hphantom{}} 同样在两个字符之间产生空白，但空白宽度为参数中内容的水平宽度。换句话说它为参数的内容“预留水平空白”。该命令置于段首和段尾无效。
+
+\item 弹性水平空白：\boxforcmd{\\hfill} 命令用于生成弹性水平空白，用于将当前行剩余的空间填满。如果当前行已经充满内容则无效。
+
+\verb|\hfill| 的这些衍生命令可以使用具体的形状而不是空白填充：
+
+\begin{tcolorbox}[colback=white]
+\begin{center}
+\begin{tabular}{ll}
+    \mbox{} \hfill 命令 \hfill \mbox{} & \mbox{} \hfill 效果 \hfill \mbox{} \\
+\hline
+    \verb|\dotfill| &  用点线填充 \\
+    \verb|\hrulefill| &  用水平线段填充 \\
+    \verb|\downbracefill| &  用开口向下的花括号填充 \\
+    \verb|\upbracefill| &  用开口向上的花括号填充 \\
+    \verb|\leftarrowfill| &  用向左的箭头填充 \\
+    \verb|\rightarrowfill| &  用向右的箭头填充 \\
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+效果示例：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+chapter1.3 \dotfill filling \\
+left \leftarrowfill mid 
+     \rightarrowfill right
+\end{lstlisting} 
+
+\tcblower
+
+chapter1.3 \dotfill filling\\
+left \leftarrowfill mid \rightarrowfill right
+\end{tcolorbox}
+
+\item 自定义竖直空白：\boxforcmd{\\vspace{}} 用于在两段间产生宽度为零的竖直空白，参数为产生空白的竖直距离，负值表示拉近间距。
+
+该命令置于页首或页尾无效。
+
+带星号的 \boxforcmd{\\hspace*{}} 作用基本相同，但置于页首或页尾仍有效，一定能在其上下内容之间生成空白。
+
+\item 定长竖直空白：\boxforcmd{\\smallskip} 生成一段高度为 $3^{+1}_{-1}$ 的可伸缩的垂直空白，输出时系统会自动选择范围内的一个值。类似地，\boxforcmd{\\medskip} 生成一段高度为 $6^{+2}_{-2}$ 的可伸缩的垂直空白；\boxforcmd{\\bigskip} 生成一段高度为 $12^{+4}_{-4}$ 的可伸缩的垂直空白。
+
+\item 虚位竖直空白：\boxforcmd{\\vphantom{}} 在两段之间产生空白，但空白高度为参数中内容的竖直高度。它为参数的内容“预留竖直空白”。
+
+该命令用在数学环境中，可主动调节 \verb|\left \right| 的自适应大小。
+
+\item 弹性竖直空白：\boxforcmd{\\vfill} 命令将当前页面剩余的垂直空间填满。该命令置于页首无效。
+
+\end{enumerate}

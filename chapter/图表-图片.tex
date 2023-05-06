@@ -1,0 +1,48 @@
+\subsection{图片}
+
+\begin{enumerate}
+
+\item \LaTeX 中的图片：使用插图有两种途径，一是插入外部绘制的图片，二是使用 \LaTeX 代码直接在文档中画图。
+
+\item 插入图片：需要 \boxforpkg{graphicx} 宏包支持，使用 \boxforcmd{\\includegraphics} 命令插图。可选参数调整图片属性，必选参数指明图形的路径：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+Hello, \includegraphics
+[height=0.5cm]{./LaTeX.png}
+\end{lstlisting} 
+
+\tcblower
+
+Hello, \includegraphics
+[height=0.5cm]{./resource/graph/LaTeX.png}
+\end{tcolorbox}
+
+支持的图形格式包括 PDF、PNG、JPG、EPS 等。
+
+插入的图形就是一个有内容的矩形盒子，在正文中排版效果和一个很大的字符类似。
+
+\item 图片环境：除了一些很小的标志图形，很少把插图直接夹在文字中。通常把图形放在一个可以变动相对位置的浮动环境中，使用 \boxforenv{figure} 环境：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{figure}[ht]
+    \centering
+    \includegraphics{./LaTeX.png}
+    \caption{\LaTeX symbol}
+\end{figure}
+\end{lstlisting} 
+
+\tcblower
+
+    \centering
+    \includegraphics[width=2cm]{./resource/graph/LaTeX.png}\vspace{-10pt}
+    \figcaption{\LaTeX symbol}
+\end{tcolorbox}
+
+\boxforenv{figure} 环境有可选参数 \boxforcmd{[ht]} ，表示浮动体可以出现在环境周围的文本所在处(here)和一页的顶部(top)。\boxforenv{figure} 环境内部相当于默认没有缩进的段落。
+
+\boxforcmd{\\caption} 命令给插图加上自动编号和标题。%\boxforcmd{\\label} 命令则给图形定义一个标签，用于在文章的其他地方引用该图片。
+
+
+\end{enumerate}

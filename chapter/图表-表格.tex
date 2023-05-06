@@ -1,0 +1,284 @@
+\subsection{表格}
+\begin{enumerate}
+
+\item 基本表格结构：表格一般都直接用 \LaTeX 命令绘制。制作表格需要确定表格的行、列对齐模式和表格线，由 \boxforenv{tabular} 环境完成：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{tabular}{|rrr|}
+    \hline
+        angle & $\sin$ & $\cos$ \\
+    \hline
+            0 &   0  & 1 \\
+    $\pi/2$ &   1  & 0 \\
+    \hline
+\end{tabular}
+\end{lstlisting} 
+
+\tcblower
+\centering
+\begin{tabular}{|rrr|}
+    \hline
+          angle & $\sin$ & $\cos$ \\
+    \hline
+              0 &   0  & 1 \\
+      $\pi / 2$ &   1  & 0 \\
+    \hline
+\end{tabular}
+\end{tcolorbox}
+
+\boxforenv{tabular} 环境有一个参数，声明了表格中列的模式：\boxforcmd{\|rrr\|} 表示表格有三列，都是右对齐(right)，在第一列前面和第三列后面各有一条垂直的表格线。在 \verb|tabular| 环境内部，行与行之间用换行命令 \boxforcmd{\\\\} 隔开，每行内部的表项则用符号 \boxforcmd{&} 隔开。表格中的横线则是用命令 \boxforcmd{\\hline} 产生的。
+
+\item 表格的对齐：基本的对齐参数 \boxforcmd{lcr} 表示左中右对齐，表格宽度会自动调整，但不会自动换行，可能超出页面宽度。可以用 \boxforcmd{p{}} 形式指定某一列的宽度，参数内为宽度值，这时自动左对齐。
+
+可以用可选参数表示文本垂直对齐方式，\boxforcmd{tcb} 分别表示顶端对齐、垂直居中、底端对齐，默认顶端对齐。
+
+\item 表格线：在必选参数内连续使用两个竖线 \boxforcmd{||} 表示绘制一条竖直双线，使用 \boxforcmd{@{}} 在每行对应绘制的竖直表格线替换为参数里的符号，参数为空表示不画竖直表格线。
+
+命令 \boxforcmd{\\hline} 用于绘制一根水平表线，而命令 \boxforcmd{\\cline{c1-c2}} 仅绘制从 \verb|c1| 列到 \verb|c2| 列的水平表线。这两个命令后面不用加换行符，因为它算当前行的顶部。两个连续的 \verb|\hline| 可以画水平双线，但是这种方式制造的双线与竖直表线的相交效果不好。
+
+\item 竖向表线与拆分单元格：在单元格内使用 \boxforcmd{\\vline} 命令仅画出等于所在行行高的竖直线。该命令常常用于横向拆分单元格。
+
+\item 表格的高级对齐：加载 \boxforpkg{array} 宏包可以使表格使用更多对齐效果，例如 \boxforcmd{m{}} 在指定某列宽度时，也会使该行的其余部分垂直居中；\boxforcmd{b{}} 在指定某列宽度时，也会使该行的其余部分底端对齐。例如：
+
+\begin{tcolorbox}[colback=white]
+    \centering
+    \begin{tabular}{|c|p{5.6em}|}
+        \hline
+            align & this column uses \verb|p{}|\\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|m{5.6em}|}
+        \hline
+            align & this column uses \verb|m{}|\\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|b{5.6em}|}
+        \hline
+            align & this column uses \verb|b{}|\\
+        \hline
+    \end{tabular}
+\end{tcolorbox}
+
+\item 列格式：\boxforpkg{array} 宏包还提供了 \boxforcmd{>{}} 和 \boxforcmd{<{}} ，分别用在 \verb|lcrpmb| 参数前后，可以使该列每个单元格开头、结尾都套上参数内的命令或声明。例如以下表格参数：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+{|>{\bfseries}c|
+  >{\raggedleft\arraybackslash}p{6cm}|}
+\end{lstlisting} 
+
+\tcblower
+
+\begin{center}
+    \begin{tabular}{|>{\bfseries}c|>{\raggedleft\arraybackslash}p{6cm}|}
+        \hline
+        ohhh & It's a very very very long loong looong loooong looooong line\\
+        \hline
+    \end{tabular}
+\end{center}
+\end{tcolorbox}
+
+使第一列单元格使用加粗字系，第二列单元格左边不平齐（就是右对齐）。其中 \boxforcmd{\\arraybackslash} 是为避免行末的 \verb|\\| 出现异常。
+
+\item 自定义列格式：可以在导言区通过自定义列格式命令 \boxforcmd{\\newcolumntype{}{}} 将复杂的 \verb|lcrpmb| 与 \verb|>{}| 和 \verb|<{}| 组合成一个格式，第一个参数是新的格式名（必须是单字母），第二个参数是组合格式。例如，在导言区定义：
+
+\begin{tcolorbox}
+\begin{lstlisting}
+\newcolumntype{f}{>{\(}c<{\)}}
+\end{lstlisting}
+\end{tcolorbox}
+
+则表格环境的参数中为 \boxforcmd{f} 的列处于行内数学环境 \verb|\( ... \)| 并居中。
+
+\item 小数对齐的列格式：宏包 \boxforpkg{siunitx} 提供了小数对齐的列格式，在导言区使用以下命令可以保留两位小数点：
+
+\begin{tcolorbox}
+\begin{lstlisting}
+\sisetup{
+  round-mode=places,
+  round-precision=2,
+}
+\end{lstlisting}
+\end{tcolorbox}
+
+然后便可以使用 \boxforcmd{S} 格式表示该列需要对齐小数点，效果为：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{tabular}{|c|S|} 
+    \hline
+    A & 1.234 \\
+    B & 12.34 \\
+    C & 123.4 \\
+    D & 12 \\ \hline 
+\end{tabular}
+\end{lstlisting} 
+
+\tcblower
+
+\begin{tabular}{|c|S|} 
+    \hline
+    A & 1.234 \\
+    B & 12.34 \\
+    C & 123.4 \\
+    D & 12 \\
+    \hline 
+\end{tabular}
+\end{tcolorbox}
+
+\item 表格与浮动：\boxforenv{tabular} 环境得到的也是一个比较大的盒子。一般也放在浮动环境 \boxforenv{table} 中，参数与大体的使用格式也与 \verb|figure| 环境类似：
+
+\begin{tcolorbox}
+\begin{lstlisting}
+\begin{table}[H]
+  % tabular
+\end{table}
+\end{lstlisting}
+\end{tcolorbox}
+
+可选参数 \boxforcmd{[H]} 表示不浮动(Here)。该选项是由 \boxforpkg{float} 宏包提供的特殊功能。
+
+\item 跨行列的单元格：需要 \boxforpkg{multirow} 宏包支持，分别使用 \boxforcmd{\\multirow{}{}{}} 和 \boxforcmd{\\multicolumn{}{}{}} 命令跨行和跨列。三个参数中：
+
+\begin{itemize}
+    \item 第一个参数表示跨越（总共包含）的行列数；
+    \item 第二个参数同 \boxforenv{tabular} 环境的参数（对齐和画线），也可以使用 \boxforcmd{*} 表示自动适应宽度；
+    \item 最后一个参数是单元格内填入的文本。
+\end{itemize}
+
+跨行列后，被跨位置的单元格仍应正常表示且内容留空，它们会被覆盖以实现跨行列。
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{tabular}{cc}
+  \hline
+  \multirow{2}{*}{multirow} & row1-2 \\
+                            & row2-2 \\
+  \hline
+\end{tabular}
+\end{lstlisting} 
+
+\tcblower
+
+\begin{tabular}{cc}
+    \hline
+    \multirow{2}{*}{multirow} & row1-2\\
+        & row2-2 \\
+    \hline
+\end{tabular}
+\end{tcolorbox}
+
+同时跨行跨列注意嵌套关系 \boxforcmd{\\multirow} 命令放在 \boxforcmd{\\multicolumn} 内部。
+
+一个非常复杂的综合示例：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{tabular}{|c|c|c|c|c|}
+  \hline
+  \multirow{2}{*}{multi-row} &
+  \multicolumn{2}{c|}{multi-col} &
+  \multicolumn{2}{c|}{
+    \multirow{2}{*}{multi-row\&col}}\\
+  \cline{2-3}
+    & col-1 & col-2 & 
+    \multicolumn{2}{c|}{} \\
+  \hline
+  item1&item2&item3&item4&item5\\
+  \hline
+\end{tabular}
+\end{lstlisting}
+
+\tcblower
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+    \hline
+    \multirow{2}{*}{multi-row} &
+    \multicolumn{2}{c|}{multi-col} &
+    \multicolumn{2}{c|}{\multirow{2}{*}{multi-row\&col}} \\
+    \cline{2-3}
+      & col-1 & col-2 & \multicolumn{2}{c|}{} \\
+    \hline
+    item1 & item2 & item3 & item4 & item5 \\
+    \hline
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\boxforcmd{\\cline{2-3}} 用于在 multi-col 下画一条第 2 栏位到第 3 栏位的边框线。空的 \boxforcmd{\\multicolumn} 用于修改同时跨行列单元格的边框线问题。
+
+\item 拆分单元格：拆分单元格的需求可以通过表格嵌套实现。
+
+\item 单元格换行：宏包 \boxforpkg{makecell} 提供了在单元格内换行方式，使用 \boxforcmd{\\makecell{}} 命令可以在参数内使用 \verb|\\| 方便地换行：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{tabular}{|c|c|c|} 
+    \hline col1 & 
+    \makecell{line1 \\ line2} & 
+    col3 \\ \hline
+\end{tabular}
+\end{lstlisting}
+
+\tcblower
+
+\begin{tabular}{|c|c|c|} 
+  \hline col1 & 
+  \makecell{row1\\row2}& 
+  col3 \\ \hline
+\end{tabular}
+\end{tcolorbox}
+
+还可以配合可选参数使用 \boxforcmd{[lcrtb]} 之一指定单元格对齐方式。
+
+\item 水平表线宽：\boxforpkg{makecell} 宏包还提供了 \boxforcmd{\\Xhline{}} 和 \boxforcmd{\\Xcline{}{}} 命令，可以通过最后一个额外的参数指定水平表线宽。以下是一个模仿三线表的示例：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{tabular}{ccc}
+  \Xhline{2pt}
+  \multirow{2}*{X} &
+  \multicolumn{2}{c}{Y} \\
+  \Xcline{2-3}{0.4pt} & Left & Right \\
+  \Xhline{1pt}
+  a & A & C \\ b & B & D \\
+  \Xhline{2pt}
+\end{tabular}
+\end{lstlisting}
+
+\tcblower
+
+\begin{tabular}{ccc}
+    \Xhline{2pt}
+    \multirow{2}*{X} &
+    \multicolumn{2}{c}{Y}\\
+    \Xcline{2-3}{0.4pt}
+    & Left & Right \\
+    \Xhline{1pt}
+    a & A & C \\
+    b & B & D \\
+    \Xhline{2pt}
+\end{tabular}\
+\end{tcolorbox}
+
+\item 分割表头：\boxforpkg{diagbox} 宏包提供了分割表头的命令 \boxforcmd{\\diagbox} 。该命令支持两个或三个参数，分别表示将表头分割成两部分或三部分，例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{tabular}{c|c}
+  \hline \diagbox{X}{data}{Y} & $y$ \\ 
+  \hline $x$ & 10 \\ \hline 
+\end{tabular}
+\end{lstlisting}
+
+\tcblower
+
+\begin{tabular}{|c|c|}
+    \hline \diagbox{X}{data}{Y} & $y$ \\ 
+    \hline $x$ & 10 \\ \hline 
+\end{tabular}
+\end{tcolorbox}
+
+\end{enumerate}

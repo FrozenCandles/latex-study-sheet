@@ -1,0 +1,328 @@
+\section{复合公式}
+
+\subsection{矩阵}
+
+\begin{enumerate}
+    
+\item 基本矩阵：使用 \verb|array| 环境可以得到表格一样的横竖对齐，可以用于对齐公式或排版矩阵。这些具有对齐的环境一般都使用 \boxforcmd{\\\\} 切换到下一行，同一行内用 \boxforcmd{&} 切换到下一列：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\[ \begin{array}{ccc}
+    x_{11} & ax + b & x_{13} \\
+    x_{21} & e^x & x_{23} 
+\end{array} \]
+\end{lstlisting} 
+
+\tcblower
+
+\[ \begin{array}{ccc}
+    x_{11} & ax + b & x_{13} \\
+    x_{21} & e^x & x_{23} 
+\end{array} \]
+\end{tcolorbox}
+
+额外的参数指明了每一列的水平对齐方式都是居中对齐(center)，还可以使用 \boxforcmd{l} 指定左对齐以及使用 \boxforcmd{r} 指定右对齐。
+
+\item 通用矩阵：宏包 \boxforpkg{amsmath} 提供了通用的 \boxforenv{matrix} 矩阵环境，无需手动指明对齐方式，其余用法一致：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\[\begin{matrix} 
+  1 & 0 \\ 0 & 1
+\end{matrix}\]
+\end{lstlisting} 
+
+\tcblower
+
+\[\begin{matrix} 1 & 0 \\ 0 & 1
+\end{matrix}\]
+\end{tcolorbox}
+
+\item 矩阵的边界符：可以用左右高度自适应的定界符为矩阵加上边界符。宏包 \boxforpkg{amsmath} 以 \boxforcmd{pbBvV} 开头的各种 \boxforenv{matrix} 环境可以为矩阵两侧加上各种边界符，以下是按顺序展示的各个边界符效果：
+
+\[ \begin{pmatrix} a&b\\c&d \end{pmatrix} \quad
+   \begin{bmatrix} a&b\\c&d \end{bmatrix} \quad
+   \begin{Bmatrix} a&b\\c&d \end{Bmatrix} \quad
+   \begin{vmatrix} a&b\\c&d \end{vmatrix} \quad
+   \begin{Vmatrix} a&b\\c&d \end{Vmatrix} \]
+
+\item 行内小矩阵：宏包 \boxforpkg{amsmath} 提供了 \boxforenv{smallmatrix} 环境，可以得到行内公式的小矩阵，加上自适应的左右括号后为 $\left(\begin{smallmatrix} a&b\\c&d \end{smallmatrix}\right)$ 效果。
+
+\item 矩阵的边界符与对齐：宏包 \boxforpkg{mathtools} 提供了各种带星的 \boxforenv{matrix*} 环境，在拥有边界符的同时，可以通过可选参数手动指定列对齐：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\[ \begin{pmatrix*}[r]
+    150 & -450 \\ 10 & 15
+\end{pmatrix*} \]
+\end{lstlisting} 
+
+\tcblower
+
+\[ \begin{pmatrix*}[r]
+    150 & -450 \\ 
+     10 & 15
+\end{pmatrix*} \]
+\end{tcolorbox}
+
+
+\end{enumerate}
+\subsection{并列公式}
+\begin{enumerate}
+
+\item 分段函数与公式并列：使用 \boxforenv{cases} 环境，会自动生成一个比 \verb|\left| 更紧凑的花括号，例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\[ y=\begin{cases}
+    x & (x \le 1) \\ 
+    2x-1 & (x>1) 
+\end{cases}\]
+\end{lstlisting} 
+
+\tcblower
+
+$$ y=\begin{cases}x & (x\le1) \\ 2x-1 & (x>1) \end{cases} $$
+\end{tcolorbox}
+
+\verb|cases| 环境行列可像矩阵一样对齐，但最多只允许包含两列。
+
+\item 并列公式中的公式样式：\verb|cases| 环境下的公式默认为 text 样式，使用 \boxforpkg{mathtools} 宏包的 \boxforenv{dcases} 环境可以得到 display 样式的内容。以下是两者的比较：
+
+\begin{tcolorbox}[colback=white]
+\[ \begin{cases}
+    \int_0^x \frac{\dd{}x}{x+1} & x > 0 \\
+    x + 1 & x \leq 0
+\end{cases} \qquad \begin{dcases}
+    \int_0^x \frac{\dd{}x}{x+1} & x > 0 \\
+    x + 1 & x \leq 0
+\end{dcases} \]
+\end{tcolorbox}
+
+\item 左并列与右括号：使用 \boxforpkg{mathtools} 宏包的 \boxforenv{rcases} 环境可以得到右花括号环境，效果为：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\[ \begin{rcases}
+    a > 0 \\
+    x_1=2,x_2=5
+\end{rcases} y=x^2-7x+10 \]
+\end{lstlisting} 
+
+\tcblower
+
+\[\quad\begin{rcases}
+    a > 0 \\
+    x_1=2,x_2=5
+\end{rcases} 
+y=x^2-7x+10 \]
+\end{tcolorbox}
+ 
+\item 并列公式和并列文本：使用带星号的 \boxforenv{dcases*} 环境可以使并列环境的第二列条件不是公式而是文本，例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\[a_n =\begin{dcases*} 
+    2^n & n is odd\\
+    n^2 & n is even
+\end{dcases*} \]
+\end{lstlisting} 
+
+\tcblower
+
+\[\quad a_n=\begin{dcases*} 
+    2^n & n is odd\\
+    n^2 & n is even
+  \end{dcases*} \]
+\end{tcolorbox}
+
+
+\end{enumerate}
+\subsection{公式与编号}
+\begin{enumerate}
+
+\item 带编号的公式：普通的行间公式不带编号，使用 \boxforenv{equation} 环境可以创建带编号的公式：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{equation}
+    a^2 + b^2 = c^2
+\end{equation}
+\end{lstlisting} 
+
+\tcblower
+
+\begin{equation}
+    a^2 + b^2 = c^2
+\end{equation}
+\end{tcolorbox}
+
+\verb|equation| 环境自带公式环境，可以直接输入公式。
+
+\item 连续编号的公式：\boxforpkg{amsmath} 宏包的 \boxforenv{gather} 环境可以给多行公式编号，环境内使用两个连续的反斜杠 \boxforcmd{\\\\} 换行，例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{gather}
+    (a+b)^2=a^2+2ab+b^2\\
+    (a-b)^2=a^2-2ab+b^2
+\end{gather}
+\end{lstlisting} 
+
+\tcblower
+
+\begin{gather}
+    (a+b)^2=a^2+2ab+b^2\\
+    (a-b)^2=a^2-2ab+b^2
+\end{gather}
+\end{tcolorbox}
+
+\item 多行的行间公式：普通的行间公式无法这样换行，带星号的 \boxforenv{gather*} 环境可以创建多行的行间公式，且均不编号。
+
+\item 公式与子编号：\boxforpkg{amsmath} 宏包使用 \boxforenv{subequations} 环境可以使环境内的公式编号变为子编号，例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{subequations} \begin{gather}
+    \sin^2 x=\frac{1-\cos 2x}{2}\\
+    \cos^2 x=\frac{1+\cos 2x}{2}
+\end{gather} \end{subequations}
+\end{lstlisting} 
+
+\tcblower
+
+\begin{subequations} \begin{gather}
+    \sin^2 x=\frac{1-\cos 2x}{2}\\
+    \cos^2 x=\frac{1+\cos 2x}{2}
+    \end{gather} 
+\end{subequations}
+\end{tcolorbox}
+
+\item 自定义编号行为：在行尾使用命令 \boxforcmd{\\notag} 可以取消该行的编号；在行尾使用命令 \boxforcmd{\\tag{}} 可以手动指定公式的编号，参数内为编号内容，且该编号会自动添加圆括号；带星号的命令 \boxforcmd{\\tag*{}} 同样可以手动指定编号，且不会自动添加圆括号。例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{gather}
+    a+b                 \\
+    b+c \notag          \\
+    c+d \tag{ii}        \\
+    d+e \tag*{$\star$}  \\
+\end{gather}
+\end{lstlisting} 
+
+\tcblower
+
+\begin{gather}
+    a+b\\
+    b+c \notag\\
+    c+d \tag{ii}\\
+    d+e \tag*{$\star$}
+\end{gather}
+\end{tcolorbox}
+
+
+\end{enumerate}
+
+\subsection{对齐公式}
+
+\begin{enumerate}
+
+\item 公式对齐：使用 \boxforpkg{amsmath} 宏包的 \boxforenv{align} 环境，通过 \boxforcmd{&} 符号确定对齐位置：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{align} a(b+c) 
+    &= ab + ac \\
+    &= ac + ab \\ 
+    &= a(c+b) \end{align}
+\end{lstlisting} 
+
+\tcblower
+
+\begin{align} a(b+c) &= ab + ac \\
+    &= ac + ab \\ &= a(c+b) \end{align}
+\end{tcolorbox}
+
+\boxforenv{align} 环境实质是奇数列居右、偶数列居左的表格，因此不用像 \boxforenv{array} 环境需要给出列的数目和对齐参数，并且可以通过空列改变列的左右对齐方式。
+
+\boxforenv{align} 环境会给每一行公式编号，带星的 \boxforenv{align*} 环境会取消所有编号。
+
+\item 对齐与空白：\boxforpkg{amsmath} 宏包的 \boxforenv{align} 环境列间会产生较大的空白，换用 \boxforenv{alignat} 环境可以得到紧凑的对齐。该环境需要指定一个数字作为参数，代表右左对齐的对数，计算方法为 $\geq$ 每行最大的 \verb|&| 数量加 1 后再除以 2 。
+
+使用带星号的 \boxforenv{alignat*} 环境可以不带编号。
+
+例如，以下对齐：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{alignat*}{3}
+    x+&2&&y=-&5\\
+     -& &&y= &7
+\end{alignat*}
+\end{lstlisting} 
+
+\tcblower
+
+\begin{alignat*}{3}
+    x+&2&&y=-&5\\
+     -& &&y= &7
+\end{alignat*}
+\end{tcolorbox}
+
+换用 \boxforenv{align} 环境会产生大量的空白，效果一言难尽，但可以从中看出 \boxforenv{alignat} 环境的参数数为 \verb|3| ：
+
+\begin{tcolorbox}[colback=white]
+\vspace{-1em}
+\begin{align*}
+    x+&2&&y=-&5\\
+     -& &&y= &7
+\end{align*}
+\end{tcolorbox}
+
+\item 公式块环境：\verb|gather|、\verb|align| 和 \verb|alignat| 环境必定占据一整行，公式块环境 \verb|gathered| 、\verb|aligned| 和 \verb|alignated| 环境只占公式实际宽度，因此同一行中可以编写其它内容。但是公式块环境需要置于其它数学环境中，且不带任何编号。
+
+\item 对齐与编号：将公式块环境嵌套在 \verb|equation| 环境中可以使多行公式只有一个居中的编号，例如：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{equation} \begin{aligned}
+    e^x&=1+x+\frac{1}{2!}x^2+\cdots
+            +\frac{1}{n!}x^n+\cdots\\
+    &=\sum_{n=0}^{\infty}\frac{x^n}{n!}
+\end{aligned} \end{equation}
+\end{lstlisting} 
+
+\tcblower
+
+\begin{equation}
+    \begin{aligned}
+        e^x&=1+x+\frac{1}{2!}x^2+\cdots+\frac{1}{n!}x^n+\cdots\\
+        &=\sum_{n=0}^{\infty}\frac{x^n}{n!}
+    \end{aligned}
+\end{equation}
+\end{tcolorbox}
+
+\item 左中右对齐：\boxforpkg{amsmath} 宏包使用 \boxforenv{multline} 环境得到第一行左对齐、中间的行居中对齐、最后一行右对齐的公式环境：
+
+\begin{tcolorbox}[sidebyside]
+\begin{lstlisting}
+\begin{multline} 
+    a_1 + b_1 \\ 
+    a_2 + b_2 \\ 
+    a_3 + b_3 \\ 
+    a_4 + b_4 
+\end{multline}
+\end{lstlisting} 
+
+\tcblower
+
+\begin{multline} a_1 + b_1 \\ 
+    a_2 + b_2 \\ a_3 + b_3 \\ 
+    a_4 + b_4 \end{multline}
+\end{tcolorbox}
+
+使用带星号的 \boxforenv{multline*} 环境可以去除最后一行产生的编号。
+
+
+\end{enumerate}
