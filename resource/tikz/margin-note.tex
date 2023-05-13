@@ -1,0 +1,31 @@
+\documentclass[twoside]{book}
+\pagestyle{plain}
+
+\usepackage{ctex}
+
+\input{../../defs.tex}
+
+\geometry{paperwidth=10cm,paperheight=8cm,right=3cm,marginparwidth=2.2cm,top=0.5cm}
+
+\begin{document}
+
+\setlength{\parsep}{8pt}
+
+使用\marginpar{这是一个边注，它的起始位置与当前行对齐，高度会自动适应} \boxforcmd{\\marginpar{}} 可以在对应位置添加边注，参数为边注内容。边注的位置由系统自动确定：
+
+\begin{itemize}[itemsep=0pt,parsep=0pt]
+    \item 单面排版时，内容放在右侧；
+    \item 双面排版时，outer 一侧（远离书脊一侧）；
+    \item 两栏排版时，内容放在远离分隔线一侧。
+\end{itemize}
+\marginpar[这个边注放在左边，它显示可选参数的内容]{这个边注放在右边，它显示必选参数的内容}
+如果为该命令提供可选参数，则若边注放在左侧，则显示可选参数的内容；否则放在右侧则显示必选参数的内容。
+
+\marginpar[这个边注放在左边，它显示可选参数的内容]{这个边注放在右边，它显示必选参数的内容}单面排版时，边注永远放在右侧，因此可选参数被忽略。
+
+
+
+
+
+
+\end{document}

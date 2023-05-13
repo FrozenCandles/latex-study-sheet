@@ -51,7 +51,7 @@
 
 对于如下定义：
 
-\begin{tcolorbox}[colback=white]
+\begin{tcolorbox}
 \begin{lstlisting}[language=TeX]
 \definecolor{FrozenBlue}{RGB}{157,234,242}
 \definecolor{CandleRed}{HTML}{F57267}
@@ -64,9 +64,11 @@
 
 \item 自定义混合颜色：\boxforcmd{\\colorlet{}{}} 提供了通过混合颜色来定义颜色的一种形式，被混合颜色和混合比例均以感叹号 \boxforcmd{!} 结尾，例如：
 
+\begin{tcolorbox}
 \begin{lstlisting}[language=TeX]
 \colorlet{PurplePink}{red!60!blue!40!}
 \end{lstlisting}
+\end{tcolorbox}
 
 会使用 60\% 红色和 40\% 蓝色混合出\;{\color{PurplePink}\verb|PurplePink|} 颜色。
 

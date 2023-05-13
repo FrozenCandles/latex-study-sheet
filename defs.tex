@@ -33,7 +33,7 @@
 \usepackage{multirow}  % 单元格跨行列
 \usepackage{hyperref}
 
-\usepackage[dvipsnames,x11names]{xcolor}  % 颜色[更多颜色,更更多颜色]
+\usepackage[dvipsnames,x11names,table]{xcolor}  % 颜色[更多颜色,更更多颜色,表格颜色]
 
 \definecolor{FrozenBlue}{RGB}{157,234,242}
 \definecolor{CandleRed}{HTML}{F57267}
@@ -53,6 +53,9 @@
 \usepackage{makecell} % 单元格换行，带粗细的表格线
 \usepackage{diagbox}  % 分割表头
 \usepackage[Symbol]{upgreek}  % 正体小写希腊字母[好看一点]
+\usepackage{dashbox}  % 虚线盒子
+\usepackage{fancybox} % 花哨盒子
+\usepackage{pdfpages} % 插入 PDF 特定页
 
 \newtcbox{\boxforpkg}{enhanced,nobeforeafter,tcbox raise base,boxrule=0.4pt,top=0mm,bottom=0mm,
   right=0mm,left=4mm,arc=1pt,boxsep=2pt,before upper={\vphantom{dlg}},
@@ -83,6 +86,7 @@ boxrule=1pt}
 
 \newcommand{\boxforcmd}[1]{\boxforcmdbox{\lstinline[language=TeX]|#1|}}%\vphantom{fg}
 \newcommand{\dd}{\mathop{}\negthinspace\mathrm{d}}
+\newcommand{\ttit}{\ttfamily\itshape}
 
 
 \makeatletter

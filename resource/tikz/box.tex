@@ -1,0 +1,74 @@
+
+\documentclass[tikz]{standalone}  
+\usepackage{ctex}
+\usepackage{tikz}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{positioning} 
+\usetikzlibrary{shapes.geometric} 
+
+
+
+\begin{document}
+
+
+\begin{tikzpicture}[every node/.style={inner sep=0,outer sep=0}]
+\fontsize{36}{40}\selectfont
+
+\tikzstyle{node} = [draw=gray, rectangle, inner sep = 0, fill = black!6, line width=0.5pt]
+\node [node] (chA) {盒};
+\node [node, right = 0cm of chA.base east, anchor = base west] (chB) {子};
+\node [node, right = 0cm of chB.base east, anchor = base west] (chC) {A};
+\node [node, right = 0cm of chC.base east, anchor = base west] (chD) {f};
+\node [node, right = 0cm of chD.base east, anchor = base west] (chE) {x};
+\node [node, right = 0cm of chE.base east, anchor = base west] (chF) {q};
+\node [node, right = 0cm of chF.base east, anchor = base west] (chG) {Q};
+
+\draw[dash pattern=on 2pt off 1.5pt] (chA.base west) -- (chG.base east) node {};
+\draw[->] ([xshift=-34pt]chA.base west) -- ([xshift=-3pt]chA.base west) node {};
+
+\filldraw (chA.base west) circle (1pt);
+\filldraw (chB.base west) circle (1pt);
+\filldraw (chC.base west) circle (1pt);
+\filldraw (chD.base west) circle (1pt);
+\filldraw (chE.base west) circle (1pt);
+\filldraw (chF.base west) circle (1pt);
+\filldraw (chG.base west) circle (1pt); 
+\filldraw (chG.base east) circle (1pt);
+
+\fontsize{8}{10}\selectfont
+% width
+\draw (chG.north east) -- ([yshift=16pt]chG.north east) node {};
+\draw (chG.north west) -- ([yshift=16pt]chG.north west) node {};
+\draw [<->] ([yshift=12pt]chG.north east) -- ([yshift=12pt]chG.north west) node [midway,above] {width};
+% height & depth
+\draw (chG.north east) -- ([xshift=10pt]chG.north east) node {};
+\draw (chG.base east) -- ([xshift=10pt]chG.base east) node {};
+\draw (chG.south east) -- ([xshift=10pt]chG.south east) node {};
+\draw [<->] ([xshift=6pt]chG.north east) -- ([xshift=6pt]chG.base east) node [midway,right] {height};
+\draw [<->] ([xshift=6pt]chG.base east) -- ([xshift=6pt]chG.south east) node [midway,right] {depth};
+% baseline
+\draw ([xshift=-20pt]chA.base west) -- ([xshift=-20pt]chA.base west) node [above] {baseline};
+% ref point
+\draw[stealth-] ([xshift=1.4pt,yshift=-1.2pt]chG.base west) -- ([xshift=14pt,yshift=-12pt]chG.base west) node {};
+\draw ([xshift=14pt,yshift=-16pt]chG.base west) -- ([xshift=14pt,yshift=-16pt]chG.base west) node {reference point};
+
+
+
+\end{tikzpicture}
+
+\end{document}
+
+
+% 我去，这都给我画出来了
+% references:
+% - https://tex.stackexchange.com/questions/58419/common-baseline-in-tikz-and-mathmode
+% - https://tex.stackexchange.com/questions/106742/increase-the-thickness-of-node-border-in-tikz
+% - https://tex.stackexchange.com/questions/583197/how-can-i-put-two-boxes-right-next-to-each-other-that-have-the-exact-same-size
+% - https://stackoverflow.com/questions/70969524/place-boundary-of-two-adjacent-nodes-on-top-of-each-other
+% - https://tex.stackexchange.com/questions/251560/draw-two-lines-between-two-nodes-with-tikz
+% - https://tex.stackexchange.com/questions/249533/text-above-line-in-tikz
+% - https://tex.stackexchange.com/questions/445108/drawing-a-double-headed-latex-arrow
+%  -https://tex.stackexchange.com/questions/209392/how-can-i-add-offsets-to-coordinates-in-tikz
+% - https://latexdraw.com/exploring-tikz-arrows/
+% - https://tex.stackexchange.com/questions/389247/a-boxs-reference-point
+% - https://tex.stackexchange.com/questions/168961/how-can-i-position-a-pdf-inside-a-tikzpicture

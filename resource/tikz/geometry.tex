@@ -1,0 +1,124 @@
+
+\documentclass[tikz]{standalone}
+
+\usepackage{ctex}
+\usepackage{tikz}
+\usepackage{xcolor}
+
+\colorlet{blockcolor}{gray!30}
+
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes.geometric} 
+\usetikzlibrary{arrows.meta,arrows}
+
+% \pgfmathsetmacro{\pagewidth}{14.142} 
+% \pgfmathsetmacro{\pageheight}{20} 
+% \pgfmathsetmacro{\pageleft}{1} 
+% \pgfmathsetmacro{\pageright}{\pageleft + \pagewidth} 
+% \pgfmathsetmacro{\pagebottom}{0} 
+% \pgfmathsetmacro{\pagetop}{\pagebottom + \pageheight} 
+% \pgfmathsetmacro{\pagepaddingleft}{2} 
+% \pgfmathsetmacro{\pagepaddingright}{4} 
+% \pgfmathsetmacro{\pagepaddingleftstart}{\pageleft + \pagepaddingleft} 
+% \pgfmathsetmacro{\pagepaddingrightstart}{\pageright - \pagepaddingright}  
+
+\pgfmathsetmacro{\szscale}{2}
+\pgfmathsetmacro{\szpaperheight}{20 / \szscale}                     % 1
+\pgfmathsetmacro{\szpaperwidth}{14.142 / \szscale}                  % 2
+\pgfmathsetmacro{\szleft}{2 / \szscale}                             % 3
+\pgfmathsetmacro{\szbottom}{3 / \szscale}                           % 4
+\pgfmathsetmacro{\szright}{3 / \szscale}                            % 5
+\pgfmathsetmacro{\sztop}{3 / \szscale}                              % 6
+\pgfmathsetmacro{\szheight}{\szpaperheight - \szbottom - \sztop}    % 7
+\pgfmathsetmacro{\szwidth}{\szpaperwidth - \szleft - \szright}      % 8
+\pgfmathsetmacro{\szheadsep}{1.2 / \szscale}                        % 9
+\pgfmathsetmacro{\szheadheight}{0.7 / \szscale}                     % 10
+\pgfmathsetmacro{\szfootskip}{2 / \szscale}                         % 11
+\pgfmathsetmacro{\szmarginparwidth}{1.5 / \szscale}                 % 12
+\pgfmathsetmacro{\szmarginparsep}{0.7 / \szscale}                   % 13
+
+\pgfmathsetmacro{\szA}{\szpaperheight}      % 1
+\pgfmathsetmacro{\szB}{\szpaperwidth}       % 2
+\pgfmathsetmacro{\szC}{\szleft}             % 3
+\pgfmathsetmacro{\szD}{\szbottom}           % 4
+\pgfmathsetmacro{\szE}{\szright}            % 5
+\pgfmathsetmacro{\szF}{\sztop}              % 6
+\pgfmathsetmacro{\szG}{\szheight}           % 7
+\pgfmathsetmacro{\szH}{\szwidth}            % 8
+\pgfmathsetmacro{\szI}{\szheadsep}          % 9
+\pgfmathsetmacro{\szJ}{\szheadheight}       % 10
+\pgfmathsetmacro{\szK}{\szfootskip}         % 11
+\pgfmathsetmacro{\szL}{\szmarginparwidth}   % 12
+\pgfmathsetmacro{\szM}{\szmarginparsep}     % 13
+
+\pgfmathsetmacro{\szfootheight}{0.5}
+\pgfmathsetmacro{\szmarginAbias}{0.5}
+\pgfmathsetmacro{\szmarginAheight}{1.7}
+\pgfmathsetmacro{\szmarginBbias}{1.3}
+\pgfmathsetmacro{\szmarginBheight}{3}
+
+
+\begin{document}
+\begin{tikzpicture}
+
+% page
+\draw [line width=2pt] (0,0) rectangle (\szB , \szA);
+% body
+\fill [color=blockcolor] (\szC , \szD) rectangle (\szC + \szH , \szD + \szG);
+\draw (\szC + \szH * 0.5 , \szD + \szG * 0.5) -- (\szC + \szH * 0.5 , \szD + \szG * 0.5) node {text};
+% foot
+\fill [color=blockcolor] (\szC , \szD - \szK) rectangle (\szC + \szH , \szD - \szK + \szfootheight);
+\draw (\szC + \szH * 0.5 , \szD - \szK + \szfootheight * 0.5) -- (\szC + \szH * 0.5 , \szD - \szK + \szfootheight * 0.5) node [midway] {foot};
+% head
+\fill [color=blockcolor] (\szC , \szA - \szF + \szI) rectangle (\szC + \szH , \szA - \szF + \szI + \szJ);
+\draw (\szC + \szH * 0.5 , \szA - \szF + \szI + \szJ * 0.5) -- (\szC + \szH * 0.5 , \szA - \szF + \szI + \szJ * 0.5) node [midway] {head};
+% margin 1
+\fill [color=blockcolor] (\szB - \szE + \szM , \szD + \szmarginAbias) rectangle (\szB - \szE + \szM + \szL , \szD + \szmarginAheight);
+% margin 2
+\fill [color=blockcolor] (\szB - \szE + \szM , \szD + \szG - \szmarginBbias) rectangle (\szB - \szE + \szM + \szL , \szD + \szG - \szmarginBheight);
+\draw (\szB - \szE + \szM + \szL * 0.5 , \szD + \szG - 2.2) -- (\szB - \szE + \szM + \szL * 0.5 , \szD + \szG - 2.2) node [midway] {\rotatebox{90}{\small margin}};
+
+\ttfamily
+
+% annotate size 1 & 2
+\draw (-0.7,0) -- (0,0);
+\draw (-0.7, \szA) -- (0, \szA) -- (0, \szA + 0.7);
+\draw (\szB , \szA) -- (\szB , \szA + 0.7);
+\draw [>=latex, <->, dashed] (-0.5,0) -- (-0.5, \szA) node [midway,left] {\textbackslash paperheight};
+\draw [>=latex, <->, dashed] (0, \szA + 0.5) -- (\szB , \szA + 0.5) node [midway,above] {\textbackslash paperwidth};
+% annotate size 3
+\draw [>=latex, <->] (0, \szA / 2 + 0.5) -- (\szC , \szA / 2 + 0.5) node [midway,above] {\textbackslash left};
+% annotate size 4 & 11
+\draw [>=latex, <->] (\szC + 0.5, \szA - \szF - \szG - \szK) -- (\szC + 0.5, \szA - \szF - \szG) node [midway,right] {\textbackslash footskip};
+\draw [>=latex, <->] (\szC + \szH - 1, \szA - \szF - \szG) -- (\szC + \szH - 1, 0) node [midway,right] {\textbackslash bottom};
+% annotate size 6 & 9 & 10
+\draw [>=latex, <->] (\szC + 0.2, \szA - \szF) -- (\szC + 0.2, \szA) node [midway,right] {\textbackslash top};
+\draw [>=latex, <->] (\szC + 1.5, \szA - \szF) -- (\szC + 1.5, \szA - \szF + \szI) node [midway,right] {\textbackslash heapsep};
+\draw [>=latex, <->] (\szC + 3.5, \szA - \szF + \szI) -- (\szC + 3.5, \szA - \szF + \szI + \szJ) node [midway,right] {\textbackslash headheight};
+% annotate size 7 & 8
+\draw [>=latex, <->] (\szC , \szD + 5.5) -- (\szC + \szH , \szD + 5.5) node [midway,above] {\textbackslash textwidth};
+\draw [>=latex, <->] (\szC + 1 , \szD) -- (\szC + 1 , \szD + \szG) node [midway,right,yshift=-2em] {\textbackslash textheight};
+% annotate size 5 & 12
+\draw [>=latex, <->] (\szB - \szE , \szA - \szF - 0.4) -- (\szB , \szA - \szF - 0.4) node [midway,above] {\textbackslash right};
+\draw [>=latex, <->] (\szB - \szE + \szM , \szD + 0.9) -- (\szB - \szE + \szL + \szM , \szD + 0.9) node [left,xshift=-2em] {\textbackslash marginparwidth};
+% annotate size 13
+\draw [>=latex, ->] (\szB - \szE - 0.6 , \szD + 1.3) -- (\szB - \szE , \szD + 1.3) node {};
+\draw [>=latex, <-] (\szB - \szE + \szM , \szD + 1.3) -- (\szB - \szE + \szM + 0.6 , \szD + 1.3) node {};
+\draw (\szB - \szE , \szD + 1.3) -- (\szB - \szE , \szD + 1.3) node [above] {\textbackslash marginparsep};
+
+
+
+
+
+
+\end{tikzpicture}
+\end{document}
+
+% ref:
+% - https://tex.stackexchange.com/questions/445108/drawing-a-double-headed-latex-arrow
+% - https://tex.stackexchange.com/questions/45848/rotate-node-text-and-use-relative-positioning-in-tikz
+% - https://tex.stackexchange.com/questions/5461/is-it-possible-to-change-the-size-of-an-arrowhead-in-tikz-pgf
+% - https://tex.stackexchange.com/questions/54796/how-to-set-default-style-for-arrow-tips-in-tikz
+% - https://tex.stackexchange.com/questions/147052/tikz-how-to-set-a-node-on-an-exact-position-on-a-line
+% - https://latexdraw.com/exploring-tikz-arrows/
